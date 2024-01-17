@@ -10,8 +10,8 @@ async function readDirectory(dirPath) {
     for (const file of files) {
       if (!(await fs.stat(path.join(dirPath, file))).isDirectory()) {
         // console.log(await fs.stat(path.join(dirPath, file)));
-        const fileName = file.split('.')[0];
-        const fileExt = file.split('.')[1];
+        const fileName = path.parse(file).name;
+        const fileExt = path.parse(file).ext.slice(1);
         const fileSize = (await fs.stat(path.join(dirPath, file))).size;
 
         console.log(`${fileName} - ${fileExt} - ${fileSize}`);
