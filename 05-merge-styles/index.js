@@ -15,19 +15,17 @@ const stylesDir = join(__dirname, 'styles');
 const singleFile = join(__dirname, 'project-dist', 'bundle.css');
 
 readdir(stylesDir, (err, files) => {
-    if (err) throw err;
+  if (err) throw err;
 
-    console.log(files);
-
+  // console.log(files);
+  const bundle = createWriteStream(singleFile);
   for (const file of files) {
     if (parse(file).ext === '.css') {
       readFile(join(stylesDir, file), (err, data) => {
         if (err) throw err;
-        console.log(data);
-        createWriteStream(singleFile).write(data);
+        // console.log(data);
+        bundle.write(data);
       });
     }
   }
-  
-  });
-
+});
