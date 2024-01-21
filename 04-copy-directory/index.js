@@ -17,7 +17,7 @@ async function readDirAndUpdate(from, to) {
     const filesFrom = await readdir(from);
     for (const file of filesFrom) {
       if (!(await stat(join(from, file))).isDirectory()) {
-        cp(join(from, file), join(to, file));
+        cpFile(join(from, file), join(to, file));
       }
     }
     const filesTo = await readdir(to);
@@ -32,7 +32,7 @@ async function readDirAndUpdate(from, to) {
   }
 }
 
-async function cp(source, destination) {
+async function cpFile(source, destination) {
   try {
     await copyFile(source, destination);
     console.log(`${source} was copied to ${destination}`);
